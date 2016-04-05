@@ -4,6 +4,9 @@ import time #import system time
 import os #add os library
 import RPi.GPIO as GPIO #turn on gpio
 import picamera #import the python camera controls
+import sys
+sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_MCP230xx')
+mcp=Adafruit_MCP230xx(busnum=1, address=0x20, num_gpios=8)
 
 GPIO.setwarnings(False) ## disables messages about GPIO pins already being in use
 GPIO.setmode(GPIO.BOARD) ## indicates which pin numbering configuration to use
@@ -13,12 +16,17 @@ GPIO.setup(35, GPIO.OUT) #set pin to send signal for image capture
 GPIO.setup(35, GPIO.LOW) #set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
 #Add pin signifier that camera is on
+###### MCP23008 GPIO SETTINGS
+mcp.pullup(0,1)
 
 global imgCount #running image count variable
 imgCount = 0
 
 global saturationCount #variable to allow saturation adjustment
 saturationCount = 0
+
+global leftPress #variable to allow left arrow press
+leftPress = 1
 
 #Default camera settings
 #camera.sharpness = 0
@@ -60,6 +68,9 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 	#PiCamera.start_preview() #start preview of camera
 	try: #create clean exit with a keyboard interupt hopefully control+c
    		while True: #infinite loop while waiting for button presses
+			leftPress = "%d" %(mcp.input(3) >> 3)
+			if leftPress == 1:
+				print "button pressed"
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() #clean up GPIO
