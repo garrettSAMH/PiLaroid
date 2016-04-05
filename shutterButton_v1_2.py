@@ -6,7 +6,8 @@ import RPi.GPIO as GPIO #turn on gpio
 import picamera #import the python camera controls
 import sys
 sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_MCP230xx')
-import Adafruit_MCP230xx
+sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_I2C')
+from Adafruit_I2C import Adafruit_I2C
 mcp=Adafruit_MCP230xx(busnum=1, address=0x20, num_gpios=8)
 
 GPIO.setwarnings(False) ## disables messages about GPIO pins already being in use
