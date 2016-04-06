@@ -74,7 +74,7 @@ def cameraReady(): #idle loop keeping the program running while you do shit
    		while True: #infinite loop while waiting for button presses
 			#print "%d: %x" % (3, mcp.input(3) >> 3)
 			leftPress = "%d" % (mcp.input(3) >> 3)
-			if leftPress == :
+			if leftPress == 1:
 				print "button pressed"
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
