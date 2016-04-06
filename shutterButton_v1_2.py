@@ -73,7 +73,7 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 	try: #create clean exit with a keyboard interupt hopefully control+c
    		while True: #infinite loop while waiting for button presses
 			leftPress = "%d" %(mcp.input(3) >> 3)
-			if leftPress == 1:
+			if leftPress == 0:
 				print "button pressed"
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
@@ -123,6 +123,8 @@ def snapPmode(self):
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) #Turn off LED to signify end of image capture sequence
 	#cameraReady() #put camera back in ready state waiting for shutter button press
+
+
 
 GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
