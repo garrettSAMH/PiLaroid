@@ -9,7 +9,7 @@ import RPi.GPIO 		as GPIO 			#turn on gpio
 import picamera 							#import the python camera controls
 import smbus
 from Adafruit_I2C		import Adafruit_I2C
-from Adafruit_MCP230XX 	import Adafruit_MCP230XX 
+from Adafruit_MCP230xx 	import Adafruit_MCP230XX 
 mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 8)
 
 GPIO.setwarnings(False) 					## disables messages about GPIO pins already being in use
