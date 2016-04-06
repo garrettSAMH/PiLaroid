@@ -81,18 +81,18 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 			leftPress = (mcp.input(0))
 			rightPress = (mcp.input(1))
 			upPress = (mcp.input(2))
-			if leftPress != 1:
+			if leftPress != 0:
 				print "button left pressed"
-				leftPress == 1
-				continue
-			elif rightPress != 1:
+				leftPress == 0
+				
+			elif rightPress != 0:
 				print "button right pressed"
-				rightPress == 1
-				continue
-			elif rightPress != 1:
+				rightPress == 0
+				
+			elif rightPress != 0:
 				print "button up pressed"
-				upPress == 1
-				continue
+				upPress == 0
+				
 			else:
 				pass
 			time.sleep(.5) #sleep function to wait for button press
