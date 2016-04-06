@@ -83,18 +83,18 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 			upPress = (mcp.input(2))
 			if leftPress != 0:
 				print "button left pressed"
-				leftPress == 0
+				leftPress = 0
 				
 			elif rightPress != 0:
 				print "button right pressed"
-				rightPress == 0
+				rightPress = 0
 				
 			elif rightPress != 0:
 				print "button up pressed"
-				upPress == 0
+				upPress = 0
 				
 			else:
-				pass
+				continue
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() #clean up GPIO
