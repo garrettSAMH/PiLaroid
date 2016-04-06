@@ -22,6 +22,10 @@ GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Satur
 											#Add pin signifier that camera is on
 											###### MCP23008 GPIO SETTINGS
 mcp.pullup(0,0)
+mcp.pullup(1,0)
+mcp.pullup(2,0)
+mcp.pullup(3,0)
+mcp.pullup(4,0)
 
 global imgCount #running image count variable
 imgCount = 0
@@ -74,10 +78,18 @@ def cameraReady(): #idle loop keeping the program running while you do shit
    		while True: #infinite loop while waiting for button presses
 			#print "%d: %x" % (3, mcp.input(3) >> 3)
 			#leftPress = (mcp.input(3) >> 3)
-			leftPress = (mcp.input(3))
+			leftPress = (mcp.input(0))
+			rightPress = (mcp.input(1))
+			upPress = (mcp.input(2))
 			if leftPress != 0:
-				print "button pressed"
+				print "button left pressed"
 				leftPress == 0
+			elif rightPress != 0:
+				print "button right pressed"
+				rightPress == 0
+			elif rightPress != 0:
+				print "button up pressed"
+				upPress == 0
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() #clean up GPIO
