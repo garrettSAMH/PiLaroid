@@ -72,10 +72,10 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 	#PiCamera.start_preview() #start preview of camera
 	try: #create clean exit with a keyboard interupt hopefully control+c
    		while True: #infinite loop while waiting for button presses
-			print "%d: %x" % (3, mcp.input(3) >> 3)
-			#leftPress = "%d" % (mcp.input(3) >> 3)
-			#if leftPress == 0:
-				#print "button pressed"
+			#print "%d: %x" % (3, mcp.input(3) >> 3)
+			leftPress = "%d" % (mcp.input(3) >> 3)
+			if leftPress == :
+				print "button pressed"
 			time.sleep(.5) #sleep function to wait for button press
 	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() #clean up GPIO
