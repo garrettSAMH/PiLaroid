@@ -8,7 +8,7 @@ import os #add os library
 import RPi.GPIO as GPIO #turn on gpio
 import picamera #import the python camera controls
 import smbus
-
+from Adafruit_I2C import Adafruit_I2C
 from Adafruit_MCP230XX import *
 mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 8)
 
