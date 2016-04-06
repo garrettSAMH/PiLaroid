@@ -3,24 +3,24 @@
 import sys
 sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_MCP230xx')
 sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_I2C')
-import time #import system time
-import os #add os library
-import RPi.GPIO as GPIO #turn on gpio
-import picamera #import the python camera controls
+import time 								#import system time
+import os 									#add os library
+import RPi.GPIO 		as GPIO 			#turn on gpio
+import picamera 							#import the python camera controls
 import smbus
-from Adafruit_I2C import Adafruit_I2C
-from Adafruit_MCP230XX import *
+from Adafruit_I2C		import Adafruit_I2C
+from Adafruit_MCP230XX 	import Adafruit_MCP230XX 
 mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 8)
 
-GPIO.setwarnings(False) ## disables messages about GPIO pins already being in use
-GPIO.setmode(GPIO.BOARD) ## indicates which pin numbering configuration to use
+GPIO.setwarnings(False) 					## disables messages about GPIO pins already being in use
+GPIO.setmode(GPIO.BOARD) 					## indicates which pin numbering configuration to use
 
 GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #set pin to watch for the shutter button
-GPIO.setup(35, GPIO.OUT) #set pin to send signal for image capture
-GPIO.setup(35, GPIO.LOW) #set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
+GPIO.setup(35, GPIO.OUT) 					#set pin to send signal for image capture
+GPIO.setup(35, GPIO.LOW) 					#set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
-#Add pin signifier that camera is on
-###### MCP23008 GPIO SETTINGS
+											#Add pin signifier that camera is on
+											###### MCP23008 GPIO SETTINGS
 mcp.pullup(0,1)
 
 global imgCount #running image count variable
