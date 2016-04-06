@@ -21,7 +21,7 @@ GPIO.setup(35, GPIO.LOW) 					#set pin to OFF state 0/GPIO.LOW/False // pin for 
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
 											#Add pin signifier that camera is on
 											###### MCP23008 GPIO SETTINGS
-mcp.pullup(0,1)
+mcp.pullup(0,0)
 
 global imgCount #running image count variable
 imgCount = 0
