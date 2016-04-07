@@ -18,9 +18,6 @@ GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #set pin to watch for the sh
 GPIO.setup(35, GPIO.OUT) 					#set pin to send signal for image capture
 GPIO.setup(35, GPIO.LOW) 					#set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
-GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
-GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
-
 											#Add pin signifier that camera is on
 											###### MCP23008 GPIO SETTINGS
 mcp.pullup(0,1)								#set pin 1 to input with pullup resistor // Pin is attached to switch that grounds the pin to get an input signal
@@ -55,6 +52,8 @@ cameraSettings = {
 }
 
 def main():
+	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
+	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 	cameraReady() 							#start the infinite loop function
 
 def eventListenSat():
