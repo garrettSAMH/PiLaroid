@@ -173,6 +173,7 @@ def right():
 	global cameraMenu 						#bring in global menu selector variable
 	global cameraMenuISO 					#bring in global menu ISO variable
 	global cameraMenuShutterSpeed
+	global cameraMenuAWB
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
 		if cameraMenuISO > 7: 				#if you reach the last item available stop counting
@@ -209,6 +210,7 @@ def left():
 	global cameraMenu
 	global cameraMenuISO
 	global cameraMenuShutterSpeed
+	global cameraMenuAWB
 	if cameraMenu == 0:
 		cameraMenuISO = cameraMenuISO - 1
 		if cameraMenuISO < 0:
