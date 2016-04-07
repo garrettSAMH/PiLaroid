@@ -70,16 +70,19 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 			upPress = (mcp.input(2))		#set pin 3 to be an up button
 			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
 				print leftPress				#no interupt or event listener is included in the MCP_230XX module
-				print "button left pressed"
+				#print "button left pressed"
 				leftPress = 1
+				left()
 			elif rightPress != 2:
 				print rightPress
-				print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
+				#print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
 				rightPress = 2				#reset the value to its original number
+				right()
 			elif upPress != 4:
 				print upPress
-				print "button up pressed"
+				#print "button up pressed"
 				upPress = 4
+				up()
 			time.sleep(.1) 					#sleep function to wait for button press
 	except KeyboardInterrupt: 				#when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() 						#clean up GPIO
@@ -154,6 +157,23 @@ def snapPmode(self):
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
 	main()
 	#cameraReady() #put camera back in ready state waiting for shutter button press
+
+
+def right():
+	print "Right Button Pressed"
+	cameraReady()
+
+def left():
+	print "Left Button Pressed"
+	cameraReady()
+
+def up():
+	print "Up Button Pressed"
+	cameraReady()
+
+def down():
+	print "Down Button Pressed"
+	cameraReady()
 
 main()										#lauch main def
 GPIO.cleanup() 								#clean up the GPIO python pin library
