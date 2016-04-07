@@ -53,16 +53,16 @@ cameraSettings = {
 	'brightness': 50, 						#0 to 100
 	'saturation': 0,  						#-100 to 100
 	'exposure_compensation': 0, 			#-25 to 25
-	'exposure_mode': 'auto', 
+	'exposure_mode': 'verylong', 
 	'meter_mode': 'average', 				#average, spot
 	'awb_mode': 'auto',
 	'image_effect': 'none',
 	'color_effects': 'None'
 }
-cameraMenuTypes = 'ISO', 'Shutter Speed'
-ISO = 0, 100, 200, 400, 800, 1600
-ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
-ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
+cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance'
+ISO = 0, 100, 200, 320, 400, 500, 640, 800
+ShutterSpeed = 0, 10, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
+ShutterSpeedMicro = 0, 1000000, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -171,8 +171,8 @@ def right():
 	global cameraMenuShutterSpeed
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
-		if cameraMenuISO > 5: 				#if you reach the last item available stop counting
-			cameraMenuISO = 5 				#set to max variable
+		if cameraMenuISO > 7: 				#if you reach the last item available stop counting
+			cameraMenuISO = 7 				#set to max variable
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 		else:
@@ -231,8 +231,8 @@ def up():
 def down():
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
-	if cameraMenu > 1:
-		cameraMenu = 1
+	if cameraMenu > 2:
+		cameraMenu = 2
 	print cameraMenuTypes[cameraMenu]
 	time.sleep(.2)
 	cameraReady()
