@@ -58,8 +58,6 @@ def main():
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
 	global imgCount 						#import global image count variable
-	#with picamera.PiCamera() as camera:
-	#PiCamera.start_preview() #start preview of camera
 	#print mcp.input(0)
 	#print mcp.input(1)
 	#print mcp.input(2)
@@ -154,7 +152,7 @@ def snapPmode(self):
 		camera.capture('/media/piCam/foo_'+date_string+'_{0:04}.jpg'.format(imgCount)) #Capture image, add the date into the file name and add the global count variable into file name. Everytime the program turns off then back on the count resets.
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
-	cameraReady()
+	main()
 
 
 
