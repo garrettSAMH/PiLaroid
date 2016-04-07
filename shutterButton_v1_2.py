@@ -52,8 +52,8 @@ cameraSettings = {
 }
 
 def main():
-	GPIO.add_event_callback(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
-	GPIO.add_event_callback(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
+	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
+	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 	cameraReady() 							#start the infinite loop function
 
 def eventListenSat():
