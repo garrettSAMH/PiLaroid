@@ -93,7 +93,7 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 		GPIO.cleanup() 						#clean up GPIO
 
 def saturationCallback(self): 				#Control saturation adjustment attached to push button currently
-	GPIO.remove_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #remove listener for button press on saturation
+	GPIO.remove_event_detect(33) #remove listener for button press on saturation
 	global saturationCount 					#pull in global variable default starts at 0
 	if saturationCount == 0:
 		saturationCount = saturationCount + 1 #add 1 to saturationCount so we know the current state
