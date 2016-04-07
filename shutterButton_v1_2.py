@@ -76,6 +76,7 @@ def main():
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
 	global imgCount 						#import global image count variable
+	print "C a m e r a   R e a d y"
 	#print mcp.input(0)
 	#print mcp.input(1)
 	#print mcp.input(2)
