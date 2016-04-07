@@ -61,8 +61,8 @@ cameraSettings = {
 }
 cameraMenuTypes = 'ISO', 'Shutter Speed'
 ISO = 0, 100, 200, 400, 800, 1600
-ShutterSpeed = 0, 15, 10, 5, 1, 2.1, 4.1, 8.1, 15.1, 30.1, 60.1, 125.1, 250.1, 500.1 
-ShutterSpeedMicro = 0, 15000000, 10000000, 5000000, 1000000, 500000, 250000, 125000, 66666, 33333, 16666, 8000, 4000, 2000
+ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
+ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -180,8 +180,8 @@ def right():
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
-		if cameraMenuShutterSpeed > 13:
-			cameraMenuShutterSpeed = 13
+		if cameraMenuShutterSpeed > 8:
+			cameraMenuShutterSpeed = 8
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
