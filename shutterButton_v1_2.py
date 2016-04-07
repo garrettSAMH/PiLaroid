@@ -52,8 +52,8 @@ cameraSettings = {
 }
 
 def main():
-	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
-	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
+	#GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
+	#GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 	cameraReady() 							#start the infinite loop function
 
 def eventListenSat():
@@ -105,6 +105,7 @@ def saturationCallback(self): 				#Control saturation adjustment attached to pus
 	#time.sleep(2)
 	#eventListenSat()
 	cameraReady()
+GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 
 def snapPmode(self):
 	global imgCount 						#import global count
@@ -162,9 +163,9 @@ def snapPmode(self):
 		camera.capture('/media/piCam/foo_'+date_string+'_{0:04}.jpg'.format(imgCount)) #Capture image, add the date into the file name and add the global count variable into file name. Everytime the program turns off then back on the count resets.
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
-	eventListenShutter()
-	#cameraReady()
-
+	#eventListenShutter()
+	cameraReady()
+GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
 
 
 def right():
