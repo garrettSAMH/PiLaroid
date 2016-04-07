@@ -63,10 +63,10 @@ cameraSettings = {
 	'color_effects': 'None'
 }
 cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance'
-ListISO = 0, 100, 200, 320, 400, 500, 640, 800
-ListShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
-ListShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
-ListAWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
+ISO = 0, 100, 200, 320, 400, 500, 640, 800
+ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
+ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
+AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 
 def main():
 	os.system("clear")
@@ -182,14 +182,14 @@ def right():
 	global cameraMenuAWB
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
-		if cameraMenuISO > len(ListISO) - 1: 				#if you reach the last item available stop counting
-			cameraMenuISO = len(ListISO) - 1 				#set to max variable
-			cameraSettings['ISO'] = ListISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
+		if cameraMenuISO > len(ISO) - 1: 				#if you reach the last item available stop counting
+			cameraMenuISO = len(ISO) - 1 				#set to max variable
+			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 		else:
-			cameraSettings['ISO'] = ListISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
+			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
@@ -197,25 +197,25 @@ def right():
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
 		if cameraMenuShutterSpeed > 8:
 			cameraMenuShutterSpeed = 8
-			cameraSettings['shutter_speed'] = ListShutterSpeedMicro[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
-			print ListShutterSpeed[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
-			cameraSettings['shutter_speed'] = ListShutterSpeedMicro[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
-			print ListShutterSpeed[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB + 1
 		if cameraMenuAWB > 9:
 			cameraMenuAWB = 9
-			cameraSettings['awb_mode'] = ListAWB[cameraMenuAWB]
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
-			cameraSettings['awb_mode'] = ListAWB[cameraMenuAWB]
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
@@ -233,12 +233,12 @@ def left():
 		cameraMenuISO = cameraMenuISO - 1
 		if cameraMenuISO < 0:
 			cameraMenuISO = 0
-			cameraSettings['ISO'] = ListISO[cameraMenuISO]
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
 		else:
-			cameraSettings['ISO'] = ListISO[cameraMenuISO]
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
@@ -246,25 +246,25 @@ def left():
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed - 1
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
-			cameraSettings['shutter_speed'] = ListShutterSpeedMicro[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
-			print ListShutterSpeed[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
-			cameraSettings['shutter_speed'] = ListShutterSpeedMicro[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
-			print ListShutterSpeed[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB - 1
 		if cameraMenuAWB < 0:
 			cameraMenuAWB = 0
-			cameraSettings['awb_mode'] = ListAWB[cameraMenuAWB]
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
-			cameraSettings['awb_mode'] = ListAWB[cameraMenuAWB]
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
