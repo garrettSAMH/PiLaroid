@@ -173,16 +173,16 @@ def left():
 def up():
 	global cameraMenu
 	cameraMenu = cameraMenu	- 1
-		if cameraMenu < 0:
-			cameraMenu = 0
+	if cameraMenu < 0:
+		cameraMenu = 0
 	print cameraMenuTypes(cameraMenu)
 	cameraReady()
 
 def down():
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
-		if cameraMenu > 1:
-			cameraMenu = 0
+	if cameraMenu > 1:
+		cameraMenu = 0
 	print cameraMenuTypes(cameraMenu)
 	time.sleep(.2)
 	cameraReady()
