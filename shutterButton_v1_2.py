@@ -231,7 +231,7 @@ def left():
 			print ShutterSpeed[cameraMenuShutterSpeed]
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB - 1
-		if cameraMenuAWB > 0:
+		if cameraMenuAWB < 0:
 			cameraMenuAWB = 0
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			print cameraSettings['awb_mode']
