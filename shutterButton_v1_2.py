@@ -69,20 +69,16 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 			rightPress = (mcp.input(1)>>1)	#set pin 2 to be a right button // >>1 shifts bits to make value = 1 or 0
 			upPress = (mcp.input(2)>>2)		#set pin 3 to be an up button // >>2 shifts bits to make value = 1 or 0
 			downPress = (mcp.input(3)>>3)	#set pin 4 to be an down button
-			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
-				print leftPress				#no interupt or event listener is included in the MCP_230XX module
+			if leftPress != 1:				#The following if elif is a loop watching for a buttton press no interupt or event listener is included in the MCP_230XX module
 				left()						#jump to def left()
 				break						#break is needed to keep the "except KeyboardInterrupt" working
 			elif rightPress != 1:
-				print rightPress
 				right()
 				break
 			elif upPress != 1:
-				print upPress
 				up()
 				break
 			elif downPress != 1:
-				print downPress
 				down()
 				break
 			else:
@@ -159,7 +155,7 @@ def snapPmode(self):
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
 	main()
-	#cameraReady() #put camera back in ready state waiting for shutter button press
+
 
 
 def right():
