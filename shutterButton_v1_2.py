@@ -77,7 +77,7 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 			elif rightPress != 1:
 				print rightPress
 				#print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
-				rightPress = 2				#reset the value to its original number
+				#rightPress = 2				#reset the value to its original number
 				right()
 				break
 			elif upPress != 1:
