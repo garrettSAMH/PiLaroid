@@ -71,7 +71,7 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
 				print leftPress				#no interupt or event listener is included in the MCP_230XX module
 				#print "button left pressed"
-				leftPress = 1
+				#leftPress = 1
 				left()
 				break
 			elif rightPress != 1:
@@ -83,7 +83,7 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 			elif upPress != 1:
 				print upPress
 				#print "button up pressed"
-				upPress = 4
+				#upPress = 4
 				up()
 				break
 			else:
