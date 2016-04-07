@@ -18,6 +18,9 @@ GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #set pin to watch for the sh
 GPIO.setup(35, GPIO.OUT) 					#set pin to send signal for image capture
 GPIO.setup(35, GPIO.LOW) 					#set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
+GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
+GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
+
 											#Add pin signifier that camera is on
 											###### MCP23008 GPIO SETTINGS
 mcp.pullup(0,1)								#set pin 1 to input with pullup resistor // Pin is attached to switch that grounds the pin to get an input signal
@@ -52,8 +55,11 @@ cameraSettings = {
 }
 
 def main():
-	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 	cameraReady() 							#start the infinite loop function
+
+def eventListenSat():
+	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
+	cameraReady()
 
 def eventListenShutter():
 	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
@@ -97,6 +103,7 @@ def saturationCallback(self): 				#Control saturation adjustment attached to pus
 		saturationCount = 0 				#if saturation count already is 1, then this resets the count to 0
 		cameraSettings['saturation'] = 0 	#make saturation normal again
 		print "saturation is set to COLOR"
+	eventListenSat()
 
 
 def snapPmode(self):
