@@ -66,17 +66,13 @@ ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
 AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 
 def mainStart():
-	#os.system('clear')
 	print "Hello World!"
 	print "PiLaroid v1.1"
 	print "Created by: Garrett Martin"
-	time.sleep(3)
-	#os.system('clear')
 	cameraReady() 							#start the infinite loop function
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
 	global imgCount 						#import global image count variable
-	print "C a m e r a   R e a d y"
 	#print mcp.input(0)
 	#print mcp.input(1)
 	#print mcp.input(2)
@@ -184,12 +180,10 @@ def right():
 		if cameraMenuISO > len(ISO) - 1: 				#if you reach the last item available stop counting
 			cameraMenuISO = len(ISO) - 1 				#set to max variable
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	
@@ -198,12 +192,10 @@ def right():
 		if cameraMenuShutterSpeed > len(ShutterSpeed) - 1:
 			cameraMenuShutterSpeed = len(ShutterSpeed) - 1
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 	
@@ -212,12 +204,10 @@ def right():
 		if cameraMenuAWB > len(AWB) - 1:
 			cameraMenuAWB = len(AWB) - 1
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 
@@ -236,12 +226,10 @@ def left():
 		if cameraMenuISO < 0:
 			cameraMenuISO = 0
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
 	
@@ -250,12 +238,10 @@ def left():
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 	
@@ -264,12 +250,10 @@ def left():
 		if cameraMenuAWB < 0:
 			cameraMenuAWB = 0
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
-			#os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 
@@ -279,7 +263,6 @@ def left():
 	cameraReady()
 
 def up():
-	#os.system("clear")
 	global cameraMenu
 	cameraMenu = cameraMenu	- 1
 	if cameraMenu < 0:
@@ -289,7 +272,6 @@ def up():
 	cameraReady()
 
 def down():
-	#os.system("clear")
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
 	if cameraMenu > 2:
