@@ -35,6 +35,9 @@ saturationCount = 0
 global leftPress 							#variable to allow left arrow press
 leftPress = 1
 
+global cameraMenu
+cameraMenu = 0
+
 
 cameraSettings = {
 	'ISO': 0, 								# 0 is auto, 100, 200, 400, 800, 1600
@@ -50,6 +53,9 @@ cameraSettings = {
 	'image_effect': 'none',
 	'color_effects': 'None'
 }
+cameraMenuTypes = 'ISO', 'Shutter Speed'
+ISO = 0, 100, 200, 400, 800, 1600
+ShutterSpeed = 0, 15, 10, 5, 1, 2.1, 4.1, 8.1, 15.1, 30.1, 60.1, 125.1, 250.1, 500.1 
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -153,22 +159,31 @@ GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add 
 
 
 def right():
+
 	print "Right Button Pressed"
 	time.sleep(.2)
 	cameraReady()
 
 def left():
+
 	print "Left Button Pressed"
 	time.sleep(.2)
 	cameraReady()
 
 def up():
-	print "Up Button Pressed"
-	time.sleep(.2)
+	global cameraMenu
+	cameraMenu = cameraMenu	- 1
+		if cameraMenu < 0:
+			cameraMenu = 0
+	print cameraMenuTypes(cameraMenu)
 	cameraReady()
 
 def down():
-	print "Down Button Pressed"
+	global cameraMenu
+	cameraMenu = cameraMenu	+ 1
+		if cameraMenu > 1:
+			cameraMenu = 0
+	print cameraMenuTypes(cameraMenu)
 	time.sleep(.2)
 	cameraReady()
 
