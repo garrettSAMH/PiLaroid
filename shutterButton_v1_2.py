@@ -75,6 +75,7 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 	#with picamera.PiCamera() as camera:
 	#PiCamera.start_preview() #start preview of camera
 	print mcp.input(0)
+	print mcp.input(1)
 	try: #create clean exit with a keyboard interupt hopefully control+c
    		while True: #infinite loop while waiting for button presses
 			#print "%d: %x" % (3, mcp.input(3) >> 3)
@@ -88,10 +89,10 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 				print leftPress
 				print "button left pressed"
 				leftPress = 1
-			elif rightPress != 1:
-				print rightPress
-				print "button right pressed"
-				rightPress = 1
+			#elif rightPress != 1:
+			#	print rightPress
+			#	print "button right pressed"
+			#	rightPress = 1
 				
 			#if leftPress != 0:
 			#	print "button left pressed"
