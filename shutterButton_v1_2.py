@@ -27,7 +27,7 @@ mcp.pullup(3,1) 							#set pin 4 to input with pullup resistor
 mcp.pullup(4,1) 							#set pin 5 to input with pullup resistor
 
 global imgCount 							#running image count variable
-imgCount = 0
+imgCount = 1
 
 global saturationCount 						#variable to allow saturation adjustment
 saturationCount = 0
@@ -113,7 +113,6 @@ GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=3
 
 def snapPmode(self):						#becuase this is a callback, it runs on a seperate thread than the main script
 	global imgCount 						#import global count
-	imgCount = imgCount + 1					#add 1 to the image count
 	date_string = time.strftime("%H_%M_%S")	#create string with current time stamp
 	GPIO.output(35,True) 					#turn on LED to signify start of image sequence
 	with picamera.PiCamera() as camera: 	#start the camera image capture sequence
@@ -166,6 +165,7 @@ def snapPmode(self):						#becuase this is a callback, it runs on a seperate thr
 		camera.capture('/media/piCam/foo_'+date_string+'_{0:04}.jpg'.format(imgCount)) #Capture image, add the date into the file name and add the global count variable into file name. Everytime the program turns off then back on the count resets.
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
+	imgCount = imgCount + 1					#add 1 to the image count
 GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=1000) #add listener for button press for shutter
 
 
