@@ -95,7 +95,7 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 				print rightPress
 				print "button right pressed"
 				rightPress = 2
-			elif rightPress != 4:
+			elif upPress != 4:
 				print upPress
 				print "button up pressed"
 				rightPress = 4
