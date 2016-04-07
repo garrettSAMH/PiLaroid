@@ -85,6 +85,7 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 				#print "button up pressed"
 				upPress = 4
 				up()
+				break
 			else:
 				time.sleep(.1) 				#sleep function to wait for button press
 	except KeyboardInterrupt: 				#when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
