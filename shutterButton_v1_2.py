@@ -73,17 +73,20 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 				#print "button left pressed"
 				leftPress = 1
 				left()
+				break
 			elif rightPress != 2:
 				print rightPress
 				#print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
 				rightPress = 2				#reset the value to its original number
 				right()
+				break
 			elif upPress != 4:
 				print upPress
 				#print "button up pressed"
 				upPress = 4
 				up()
-			time.sleep(.1) 					#sleep function to wait for button press
+			else:
+				time.sleep(.1) 				#sleep function to wait for button press
 	except KeyboardInterrupt: 				#when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
 		GPIO.cleanup() 						#clean up GPIO
 
