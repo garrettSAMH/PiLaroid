@@ -82,7 +82,7 @@ def cameraReady(): #idle loop keeping the program running while you do shit
 			#rightPress = (mcp.input(1))
 			upPress = (mcp.input(2))
 			print upPress
-			if upPress != 0:
+			if upPress != 4:
 				print upPress
 				print "button up pressed"
 				
