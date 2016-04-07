@@ -67,7 +67,8 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
    		while True: 						#infinite loop while waiting for button presses
 			leftPress = (mcp.input(0))		#set pin 1 to be a left button
 			rightPress = (mcp.input(1)>>1)		#set pin 2 to be a right button
-			upPress = (mcp.input(2)>>2)		#set pin 3 to be an up button
+			upPress = (mcp.input(2)>>2)
+			downPress = (mcp.input(3)>>3)		#set pin 3 to be an up button
 			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
 				print leftPress				#no interupt or event listener is included in the MCP_230XX module
 				#print "button left pressed"
@@ -85,6 +86,12 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 				#print "button up pressed"
 				#upPress = 4
 				up()
+				break
+			elif downPress != 1:
+				print downPress
+				#print "button up pressed"
+				#upPress = 4
+				down()
 				break
 			else:
 				time.sleep(.1) 				#sleep function to wait for button press
