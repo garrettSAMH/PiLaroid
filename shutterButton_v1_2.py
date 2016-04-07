@@ -182,8 +182,8 @@ def right():
 	global cameraMenuAWB
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
-		if cameraMenuISO > len(ListISO): 				#if you reach the last item available stop counting
-			cameraMenuISO = len(ListISO) 				#set to max variable
+		if cameraMenuISO > len(ListISO) - 1: 				#if you reach the last item available stop counting
+			cameraMenuISO = len(ListISO) - 1 				#set to max variable
 			cameraSettings['ISO'] = ListISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
