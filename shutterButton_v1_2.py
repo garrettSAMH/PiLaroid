@@ -162,17 +162,17 @@ GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add 
 
 
 def right():
-	global cameraMenu
-	global cameraMenuISO
-	if cameraMenu == 0:
-		cameraMenuISO = cameraMenuISO + 1
-		if cameraMenuISO > 5:
-			cameraMenuISO = 5
-			cameraSettings['ISO'] = ISO[cameraMenuISO]
-			print cameraSettings['ISO']
+	global cameraMenu 						#bring in global menu selector variable
+	global cameraMenuISO 					#bring in global menu ISO variable
+	if cameraMenu == 0: 					#Determines what menu item you're able to change
+		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
+		if cameraMenuISO > 5: 				#if you reach the last item available stop counting
+			cameraMenuISO = 5 				#set to max variable
+			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
+			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 		else:
-			cameraSettings['ISO'] = ISO[cameraMenuISO]
-			print cameraSettings['ISO']
+			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
+			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 
 	print "Right Button Pressed"
 	time.sleep(.2)
