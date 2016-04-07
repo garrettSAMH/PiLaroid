@@ -5,137 +5,107 @@ sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit
 sys.path.append('/media/adafruitPyGit/Adafruit-Raspberry-Pi-Python-Code/Adafruit_I2C')
 import time 								#import system time
 import os 									#add os library
-import RPi.GPIO 		as GPIO 			#turn on gpio
 import picamera 							#import the python camera controls
-import smbus
-from Adafruit_I2C		import Adafruit_I2C
-from Adafruit_MCP230xx 	import Adafruit_MCP230XX 
-mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 8)
+import smbus								#allows gpio on mcp23008 to communicate on i2c
+import RPi.GPIO 		as GPIO 			#turn on gpio
+from Adafruit_I2C		import Adafruit_I2C	#import Adafruit_I2C module
+from Adafruit_MCP230xx 	import Adafruit_MCP230XX #import Adafruit_MCP230XX module
+mcp = Adafruit_MCP230XX(busnum = 1, address = 0x20, num_gpios = 8) #define the i2c address and number of gpio
 
 GPIO.setwarnings(False) 					## disables messages about GPIO pins already being in use
 GPIO.setmode(GPIO.BOARD) 					## indicates which pin numbering configuration to use
-
 GPIO.setup(37, GPIO.IN, pull_up_down=GPIO.PUD_DOWN) #set pin to watch for the shutter button
 GPIO.setup(35, GPIO.OUT) 					#set pin to send signal for image capture
 GPIO.setup(35, GPIO.LOW) 					#set pin to OFF state 0/GPIO.LOW/False // pin for signal image capture
 GPIO.setup(33, GPIO.IN, pull_up_down=GPIO.PUD_DOWN)  #set pin to watch for Saturation Switch
 											#Add pin signifier that camera is on
 											###### MCP23008 GPIO SETTINGS
-mcp.pullup(0,1)
-mcp.pullup(1,1)
-mcp.pullup(2,1)
-mcp.pullup(3,1)
-mcp.pullup(4,1)
+mcp.pullup(0,1)								#set pin 1 to input with pullup resistor // Pin is attached to switch that grounds the pin to get an input signal
+mcp.pullup(1,1) 							#set pin 2 to input with pullup resistor
+mcp.pullup(2,1) 							#set pin 3 to input with pullup resistor
+mcp.pullup(3,1) 							#set pin 4 to input with pullup resistor
+mcp.pullup(4,1) 							#set pin 5 to input with pullup resistor
 
-global imgCount #running image count variable
+global imgCount 							#running image count variable
 imgCount = 0
 
-global saturationCount #variable to allow saturation adjustment
+global saturationCount 						#variable to allow saturation adjustment
 saturationCount = 0
 
-global leftPress #variable to allow left arrow press
+global leftPress 							#variable to allow left arrow press
 leftPress = 1
 
-#Default camera settings
-#camera.sharpness = 0
-#camera.contrast = 0
-#camera.brightness = 50
-#camera.saturation = 0
-#camera.ISO = 0
-#camera.video_stabilization = False
-#camera.exposure_compensation = 0
-#camera.exposure_mode = 'auto'
-#camera.meter_mode = 'average'
-#camera.awb_mode = 'auto'
-#camera.image_effect = 'none'
-#camera.color_effects = None
-#camera.rotation = 0
-#camera.hflip = False
-#camera.vflip = False
-#camera.crop = (0.0, 0.0, 1.0, 1.0)
 
 cameraSettings = {
-	'ISO': 0, # 0 is auto, 100, 200, 400, 800, 1600
-	'shutter_speed': 0, #0 is auto, otherwise is read as miliseconds
-	'sharpness': 0, #0 to 100
-	'contrast': 0,  #0 to 100
-	'brightness': 50, #0 to 100
-	'saturation': 0,  #-100 to 100
-	'exposure_compensation': 0, #-25 to 25
+	'ISO': 0, 								# 0 is auto, 100, 200, 400, 800, 1600
+	'shutter_speed': 0, 					#0 is auto, otherwise is read as miliseconds
+	'sharpness': 0, 						#0 to 100
+	'contrast': 0,  						#0 to 100
+	'brightness': 50, 						#0 to 100
+	'saturation': 0,  						#-100 to 100
+	'exposure_compensation': 0, 			#-25 to 25
 	'exposure_mode': 'auto', 
-	'meter_mode': 'average', #average, spot
+	'meter_mode': 'average', 				#average, spot
 	'awb_mode': 'auto',
 	'image_effect': 'none',
 	'color_effects': 'None'
 }
 
+def main():
+	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
+	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
+	cameraReady() 							#start the infinite loop function
 
-def cameraReady(): #idle loop keeping the program running while you do shit
-	global imgCount #import global image count variable
+def cameraReady(): 							#idle loop keeping the program running while you do shit
+	global imgCount 						#import global image count variable
 	#with picamera.PiCamera() as camera:
 	#PiCamera.start_preview() #start preview of camera
 	print mcp.input(0)
 	print mcp.input(1)
 	print mcp.input(2)
-	try: #create clean exit with a keyboard interupt hopefully control+c
-   		while True: #infinite loop while waiting for button presses
-			#print "%d: %x" % (3, mcp.input(3) >> 3)
-			#leftPress = (mcp.input(3) >> 3)
-			#leftPress = (mcp.input(0))
-			#rightPress = (mcp.input(1))
-			leftPress = (mcp.input(0))
-			rightPress = (mcp.input(1))
-			upPress = (mcp.input(2))
-			#print leftPress
-			if leftPress != 1:
-				print leftPress
+	try: 									#create clean exit with a keyboard interupt hopefully control+c
+   		while True: 						#infinite loop while waiting for button presses
+			leftPress = (mcp.input(0))		#set pin 1 to be a left button
+			rightPress = (mcp.input(1))		#set pin 2 to be a right button
+			upPress = (mcp.input(2))		#set pin 3 to be an up button
+			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
+				print leftPress				#no interupt or event listener is included in the MCP_230XX module
 				print "button left pressed"
 				leftPress = 1
 			elif rightPress != 2:
 				print rightPress
-				print "button right pressed"
-				rightPress = 2
+				print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
+				rightPress = 2				#reset the value to its original number
 			elif upPress != 4:
 				print upPress
 				print "button up pressed"
 				upPress = 4
-				
-			#if leftPress != 0:
-			#	print "button left pressed"
-			#	leftPress = 0
-			#	
-			#elif rightPress != 0:
-			#	print "button right pressed"
-			#	rightPress = 0
-			#	
-			#elif rightPress != 0:
-			#	print "button up pressed"
-			#	upPress = 0
-				
-			#else:
-			#	continue
-			time.sleep(.1) #sleep function to wait for button press
-	except KeyboardInterrupt: #when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
-		GPIO.cleanup() #clean up GPIO
+			time.sleep(.1) 					#sleep function to wait for button press
+	except KeyboardInterrupt: 				#when you press control+c python throws a KeyboardInterupt, so do the GPIO cleanup
+		GPIO.cleanup() 						#clean up GPIO
 
-def saturationCallback(self): #Control saturation adjustment attached to push button currently
-	global saturationCount #pull in global variable default starts at 0
+def saturationCallback(self): 				#Control saturation adjustment attached to push button currently
+	global saturationCount 					#pull in global variable default starts at 0
 	if saturationCount == 0:
 		saturationCount = saturationCount + 1 #add 1 to saturationCount so we know the current state
 		cameraSettings['saturation'] = -100 #change value for saturation key in cameraSettings Dict
 		print "saturation is set to BW"
 	else:
-		saturationCount = 0 #if saturation count already is 1, then this resets the count to 0
-		cameraSettings['saturation'] = 0 #make saturation normal again
+		saturationCount = 0 				#if saturation count already is 1, then this resets the count to 0
+		cameraSettings['saturation'] = 0 	#make saturation normal again
 		print "saturation is set to COLOR"
 
 
 def snapPmode(self):
-	global imgCount #import global count
-	imgCount = imgCount + 1
-	date_string = time.strftime("%H_%M_%S") #create string with current time stamp
-	GPIO.output(35,True) #turn on LED to signify start of image sequence
-	with picamera.PiCamera() as camera: #start the camera image capture sequence
+	global imgCount 						#import global count
+	imgCount = imgCount + 1					#add 1 to the image count
+	date_string = time.strftime("%H_%M_%S")	#create string with current time stamp
+	GPIO.output(35,True) 					#turn on LED to signify start of image sequence
+	with picamera.PiCamera() as camera: 	#start the camera image capture sequence
+
+		########################
+		##   CAMERA SETTINGS  ##
+		########################
 		#camera.start_preview() #start preview to adjust settings
 		#Default camera settings
 		camera.resolution = (2592, 1944) #max resolution is (2592, 1944)
@@ -156,22 +126,21 @@ def snapPmode(self):
 		camera.hflip = False
 		camera.vflip = False
 		#camera.crop = (0.0, 0.0, 1.0, 1.0)
-		#END CAMERA SETTINGS
-		time.sleep(.5)
+		#########################
+		## END CAMERA SETTINGS ##
+		#########################
+		
+		time.sleep(.5)						#give the camera time to adjust the settings
 		camera.capture('/media/piCam/foo_'+date_string+'_{0:04}.jpg'.format(imgCount)) #Capture image, add the date into the file name and add the global count variable into file name. Everytime the program turns off then back on the count resets.
 		#camera.stop_preview() #stop preview
-	GPIO.output(35,False) #Turn off LED to signify end of image capture sequence
+	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
+	main()
 	#cameraReady() #put camera back in ready state waiting for shutter button press
 
-
-
-GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
-GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
-cameraReady() #start the infinite loop function
-GPIO.cleanup() #clean up the GPIO python pin library
+main()										#lauch main def
+GPIO.cleanup() 								#clean up the GPIO python pin library
 
 
 #  ===============  #
 #  [   S A M H   ]  #
 #  ===============  #
-
