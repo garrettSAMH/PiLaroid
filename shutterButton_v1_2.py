@@ -162,6 +162,8 @@ GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add 
 
 
 def right():
+	global cameraMenu
+	global cameraMenuISO
 	if cameraMenu == 0:
 		cameraMenuISO = cameraMenuISO + 1
 		if cameraMenuISO > 5:
@@ -177,6 +179,8 @@ def right():
 	cameraReady()
 
 def left():
+	global cameraMenu
+	global cameraMenuISO
 	if cameraMenu == 0:
 		cameraMenuISO = cameraMenuISO - 1
 		if cameraMenuISO < 0:
