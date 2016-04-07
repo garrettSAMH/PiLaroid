@@ -44,6 +44,9 @@ cameraMenuISO = 0
 global cameraMenuShutterSpeed
 cameraMenuShutterSpeed = 0
 
+global cameraMenuAWB
+cameraMenuAWB = 0
+
 
 cameraSettings = {
 	'ISO': 0, 								# 0 is auto, 100, 200, 400, 800, 1600
@@ -53,7 +56,7 @@ cameraSettings = {
 	'brightness': 50, 						#0 to 100
 	'saturation': 0,  						#-100 to 100
 	'exposure_compensation': 0, 			#-25 to 25
-	'exposure_mode': 'verylong', 
+	'exposure_mode': 'auto', 
 	'meter_mode': 'average', 				#average, spot
 	'awb_mode': 'auto',
 	'image_effect': 'none',
@@ -61,8 +64,9 @@ cameraSettings = {
 }
 cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance'
 ISO = 0, 100, 200, 320, 400, 500, 640, 800
-ShutterSpeed = 0, 10, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
-ShutterSpeedMicro = 0, 1000000, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
+ShutterSpeed = 0, 1, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
+ShutterSpeedMicro = 0, 100000, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
+AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -180,13 +184,22 @@ def right():
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
-		if cameraMenuShutterSpeed > 8:
-			cameraMenuShutterSpeed = 8
+		if cameraMenuShutterSpeed > 9:
+			cameraMenuShutterSpeed = 9
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
+	elif cameraMenu == 2:
+		cameraMenuAWB = cameraMenuAWB + 1
+		if cameraMenuAWB > 9:
+			cameraMenuAWB = 9
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			print cameraSettings['awb_mode']
+		else:
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			print cameraSettings['awb_mode']
 
 	print "Right Button Pressed"
 	time.sleep(.2)
@@ -214,6 +227,16 @@ def left():
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
+	elif cameraMenu == 2:
+		cameraMenuAWB = cameraMenuAWB - 1
+		if cameraMenuAWB > 0:
+			cameraMenuAWB = 0
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			print cameraSettings['awb_mode']
+		else:
+			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			print cameraSettings['awb_mode']
+
 
 	print "Left Button Pressed"
 	time.sleep(.2)
