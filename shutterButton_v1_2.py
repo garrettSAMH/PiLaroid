@@ -179,30 +179,42 @@ def right():
 		if cameraMenuISO > 7: 				#if you reach the last item available stop counting
 			cameraMenuISO = 7 				#set to max variable
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
 		if cameraMenuShutterSpeed > 9:
 			cameraMenuShutterSpeed = 9
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB + 1
 		if cameraMenuAWB > 9:
 			cameraMenuAWB = 9
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 
-	print "Right Button Pressed"
+	#print "Right Button Pressed"
 	time.sleep(.2)
 	cameraReady()
 
@@ -216,31 +228,43 @@ def left():
 		if cameraMenuISO < 0:
 			cameraMenuISO = 0
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed - 1
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB - 1
 		if cameraMenuAWB < 0:
 			cameraMenuAWB = 0
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 		else:
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
+			os.system("clear")
+			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
 
 
-	print "Left Button Pressed"
+	#print "Left Button Pressed"
 	time.sleep(.2)
 	cameraReady()
 
