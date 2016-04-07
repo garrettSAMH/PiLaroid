@@ -59,6 +59,7 @@ cameraSettings = {
 cameraMenuTypes = 'ISO', 'Shutter Speed'
 ISO = 0, 100, 200, 400, 800, 1600
 ShutterSpeed = 0, 15, 10, 5, 1, 2.1, 4.1, 8.1, 15.1, 30.1, 60.1, 125.1, 250.1, 500.1 
+ShutterSpeedMilli = 0, 15000, 10000, 5000, 1000, 500, 250, 125, 66.6, 33.3, 16.6, 8, 4, 2
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -173,6 +174,15 @@ def right():
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
+	elif cameraMenu == 1:
+		cameraMenuShutterSpeed == cameraMenuShutterSpeed + 1
+		if cameraMenuShutterSpeed > 13:
+			cameraMenuShutterSpeed = 13
+			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
+		else:
+			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 
 	print "Right Button Pressed"
 	time.sleep(.2)
@@ -190,6 +200,15 @@ def left():
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			print cameraSettings['ISO']
+	elif cameraMenu == 1:
+		cameraMenuShutterSpeed == cameraMenuShutterSpeed - 1
+		if cameraMenuShutterSpeed < 0:
+			cameraMenuShutterSpeed = 0
+			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
+		else:
+			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			print ShutterSpeed[cameraMenuShutterSpeed]
 
 	print "Left Button Pressed"
 	time.sleep(.2)
