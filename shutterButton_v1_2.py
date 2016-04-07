@@ -102,9 +102,9 @@ def saturationCallback(self): 				#Control saturation adjustment attached to pus
 		saturationCount = 0 				#if saturation count already is 1, then this resets the count to 0
 		cameraSettings['saturation'] = 0 	#make saturation normal again
 		print "saturation is set to COLOR"
-	time.sleep(2)
-	eventListenSat()
-	#cameraReady()
+	#time.sleep(2)
+	#eventListenSat()
+	cameraReady()
 
 def snapPmode(self):
 	global imgCount 						#import global count
