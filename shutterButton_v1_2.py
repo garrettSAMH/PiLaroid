@@ -53,10 +53,10 @@ cameraSettings = {
 
 def main():
 	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
-	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
 	cameraReady() 							#start the infinite loop function
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
+	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
 	global imgCount 						#import global image count variable
 	#print mcp.input(0)
 	#print mcp.input(1)
