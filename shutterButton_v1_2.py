@@ -176,13 +176,14 @@ def up():
 	if cameraMenu < 0:
 		cameraMenu = 0
 	print cameraMenuTypes[cameraMenu]
+	time.sleep(.2)
 	cameraReady()
 
 def down():
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
 	if cameraMenu > 1:
-		cameraMenu = 0
+		cameraMenu = 1
 	print cameraMenuTypes[cameraMenu]
 	time.sleep(.2)
 	cameraReady()
