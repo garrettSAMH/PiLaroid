@@ -179,7 +179,7 @@ def right():
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	elif cameraMenu == 1:
-		cameraMenuShutterSpeed == cameraMenuShutterSpeed + 1
+		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
 		if cameraMenuShutterSpeed > 13:
 			cameraMenuShutterSpeed = 13
 			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
@@ -206,7 +206,7 @@ def left():
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			print cameraSettings['ISO']
 	elif cameraMenu == 1:
-		cameraMenuShutterSpeed == cameraMenuShutterSpeed - 1
+		cameraMenuShutterSpeed = cameraMenuShutterSpeed - 1
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
 			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
