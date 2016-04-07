@@ -38,6 +38,9 @@ leftPress = 1
 global cameraMenu
 cameraMenu = 0
 
+global cameraMenuISO
+cameraMenuISO = 0
+
 
 cameraSettings = {
 	'ISO': 0, 								# 0 is auto, 100, 200, 400, 800, 1600
@@ -159,13 +162,31 @@ GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add 
 
 
 def right():
+	if cameraMenu == 0
+		cameraMenuISO = cameraMenuISO + 1
+		if cameraMenuISO > 5:
+			cameraMenuISO = 5
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			print cameraSettings['ISO']
+		else:
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			print cameraSettings['ISO']
 
 	print "Right Button Pressed"
 	time.sleep(.2)
 	cameraReady()
 
 def left():
-
+	if cameraMenu == 0
+		cameraMenuISO = cameraMenuISO - 1
+		if cameraMenuISO < 0:
+			cameraMenuISO = 0
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			print cameraSettings['ISO']
+		else:
+			cameraSettings['ISO'] = ISO[cameraMenuISO]
+			print cameraSettings['ISO']
+			
 	print "Left Button Pressed"
 	time.sleep(.2)
 	cameraReady()
