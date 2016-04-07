@@ -62,7 +62,7 @@ cameraSettings = {
 cameraMenuTypes = 'ISO', 'Shutter Speed'
 ISO = 0, 100, 200, 400, 800, 1600
 ShutterSpeed = 0, 15, 10, 5, 1, 2.1, 4.1, 8.1, 15.1, 30.1, 60.1, 125.1, 250.1, 500.1 
-ShutterSpeedMilli = 0, 150000, 100000, 50000, 10000, 5000, 2500, 1250, 66.6, 33.3, 16.6, 8, 4, 2
+ShutterSpeedMicro = 0, 15000000, 10000000, 5000000, 1000000, 500000, 250000, 125000, 66666.6, 33333.3, 16666.6, 8000, 4000, 2000
 
 def main():
 	cameraReady() 							#start the infinite loop function
@@ -119,7 +119,7 @@ def snapPmode(self):						#becuase this is a callback, it runs on a seperate thr
 		########################
 		#camera.start_preview() #start preview to adjust settings
 		camera.resolution = (2592, 1944) #max resolution is (2592, 1944)
-		camera.shutter_speed = cameraSettings['shutter_speed'] #value is miliseconds  <-------Pulled from camera settings dict
+		camera.shutter_speed = cameraSettings['shutter_speed'] #value is microseconds  <-------Pulled from camera settings dict
 		camera.sharpness = cameraSettings['sharpness'] #0 to 100 <-------Pulled from camera settings dict
 		camera.contrast = cameraSettings['contrast'] #0 to 100 <-------Pulled from camera settings dict
 		camera.brightness = cameraSettings['brightness'] #0 to 100 <-------Pulled from camera settings dict
@@ -182,10 +182,10 @@ def right():
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
 		if cameraMenuShutterSpeed > 13:
 			cameraMenuShutterSpeed = 13
-			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
-			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 
 	print "Right Button Pressed"
@@ -209,10 +209,10 @@ def left():
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed - 1
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
-			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
-			cameraSettings['shutter_speed'] = ShutterSpeedMilli[cameraMenuShutterSpeed]
+			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print ShutterSpeed[cameraMenuShutterSpeed]
 
 	print "Left Button Pressed"
