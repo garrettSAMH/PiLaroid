@@ -65,13 +65,13 @@ ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
 ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
 AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 
-def main():
-	#os.system("clear")
+def mainStart():
+	os.system("clear")
 	print "Hello World!"
 	print "PiLaroid v1.1"
 	print "Created by: Garrett Martin"
 	time.sleep(3)
-	#os.system("clear")
+	os.system("clear")
 	cameraReady() 							#start the infinite loop function
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
@@ -298,7 +298,7 @@ def down():
 	time.sleep(.2)
 	cameraReady()
 
-main()								#lauch cameraReady def
+mainStart()								#lauch cameraReady def
 GPIO.cleanup() 								#clean up the GPIO python pin library
 
 
