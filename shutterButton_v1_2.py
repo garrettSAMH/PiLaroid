@@ -93,7 +93,6 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 		GPIO.cleanup() 						#clean up GPIO
 
 def saturationCallback(self): 				#Control saturation adjustment attached to push button currently
-	GPIO.remove_event_detect(33) #remove listener for button press on saturation
 	global saturationCount 					#pull in global variable default starts at 0
 	if saturationCount == 0:
 		saturationCount = saturationCount + 1 #add 1 to saturationCount so we know the current state
@@ -103,7 +102,7 @@ def saturationCallback(self): 				#Control saturation adjustment attached to pus
 		saturationCount = 0 				#if saturation count already is 1, then this resets the count to 0
 		cameraSettings['saturation'] = 0 	#make saturation normal again
 		print "saturation is set to COLOR"
-	eventListenSat()
+	#eventListenSat()
 	#cameraReady()
 GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 
@@ -163,7 +162,7 @@ def snapPmode(self):
 		camera.capture('/media/piCam/foo_'+date_string+'_{0:04}.jpg'.format(imgCount)) #Capture image, add the date into the file name and add the global count variable into file name. Everytime the program turns off then back on the count resets.
 		#camera.stop_preview() #stop preview
 	GPIO.output(35,False) 					#Turn off LED to signify end of image capture sequence
-	eventListenShutter()
+	#eventListenShutter()
 	#cameraReady()
 GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
 
