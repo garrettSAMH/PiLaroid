@@ -62,7 +62,7 @@ cameraSettings = {
 cameraMenuTypes = 'ISO', 'Shutter Speed'
 ISO = 0, 100, 200, 400, 800, 1600
 ShutterSpeed = 0, 15, 10, 5, 1, 2.1, 4.1, 8.1, 15.1, 30.1, 60.1, 125.1, 250.1, 500.1 
-ShutterSpeedMicro = 0, 15000000, 10000000, 5000000, 1000000, 500000, 250000, 125000, 66666.6, 33333.3, 16666.6, 8000, 4000, 2000
+ShutterSpeedMicro = 0, 15000000, 10000000, 5000000, 1000000, 500000, 250000, 125000, 66666, 33333, 16666, 8000, 4000, 2000
 
 def main():
 	cameraReady() 							#start the infinite loop function
