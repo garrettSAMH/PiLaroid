@@ -60,37 +60,29 @@ def cameraReady(): 							#idle loop keeping the program running while you do sh
 	global imgCount 						#import global image count variable
 	#with picamera.PiCamera() as camera:
 	#PiCamera.start_preview() #start preview of camera
-	print mcp.input(0)
-	print mcp.input(1)
-	print mcp.input(2)
+	#print mcp.input(0)
+	#print mcp.input(1)
+	#print mcp.input(2)
 	try: 									#create clean exit with a keyboard interupt hopefully control+c
    		while True: 						#infinite loop while waiting for button presses
 			leftPress = (mcp.input(0))		#set pin 1 to be a left button
-			rightPress = (mcp.input(1)>>1)		#set pin 2 to be a right button
-			upPress = (mcp.input(2)>>2)
-			downPress = (mcp.input(3)>>3)		#set pin 3 to be an up button
+			rightPress = (mcp.input(1)>>1)	#set pin 2 to be a right button // >>1 shifts bits to make value = 1 or 0
+			upPress = (mcp.input(2)>>2)		#set pin 3 to be an up button // >>2 shifts bits to make value = 1 or 0
+			downPress = (mcp.input(3)>>3)	#set pin 4 to be an down button
 			if leftPress != 1:				#The following if elif is a loop watching for a buttton press
 				print leftPress				#no interupt or event listener is included in the MCP_230XX module
-				#print "button left pressed"
-				#leftPress = 1
-				left()
-				break
+				left()						#jump to def left()
+				break						#break is needed to keep the "except KeyboardInterrupt" working
 			elif rightPress != 1:
 				print rightPress
-				#print "button right pressed"#currently just prints to show button press (NEEDS DEBOUNCER)
-				#rightPress = 2				#reset the value to its original number
 				right()
 				break
 			elif upPress != 1:
 				print upPress
-				#print "button up pressed"
-				#upPress = 4
 				up()
 				break
 			elif downPress != 1:
 				print downPress
-				#print "button up pressed"
-				#upPress = 4
 				down()
 				break
 			else:
