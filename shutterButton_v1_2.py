@@ -52,7 +52,6 @@ cameraSettings = {
 }
 
 def main():
-	GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 	GPIO.add_event_detect(37, GPIO.RISING, callback=snapPmode, bouncetime=300) #add listener for button press for shutter
 	cameraReady() 							#start the infinite loop function
 
@@ -178,6 +177,7 @@ def down():
 	time.sleep(.2)
 	cameraReady()
 
+GPIO.add_event_detect(33, GPIO.RISING, callback=saturationCallback, bouncetime=300) #add listener for button press on saturation
 main()										#lauch main def
 GPIO.cleanup() 								#clean up the GPIO python pin library
 
