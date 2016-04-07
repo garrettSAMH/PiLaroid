@@ -32,9 +32,6 @@ imgCount = 0
 global saturationCount 						#variable to allow saturation adjustment
 saturationCount = 0
 
-global leftPress 							#variable to allow left arrow press
-leftPress = 1
-
 global cameraMenu
 cameraMenu = 0
 
@@ -211,8 +208,8 @@ def right():
 	
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB + 1
-		if cameraMenuAWB > 9:
-			cameraMenuAWB = 9
+		if cameraMenuAWB > len(AWB) - 1:
+			cameraMenuAWB = len(AWB) - 1
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
