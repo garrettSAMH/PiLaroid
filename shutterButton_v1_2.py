@@ -180,6 +180,7 @@ def right():
 	global cameraMenuISO 					#bring in global menu ISO variable
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
+	
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
 		if cameraMenuISO > len(ISO) - 1: 				#if you reach the last item available stop counting
@@ -193,10 +194,11 @@ def right():
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
+	
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
-		if cameraMenuShutterSpeed > 8:
-			cameraMenuShutterSpeed = 8
+		if cameraMenuShutterSpeed > len(ShutterSpeed) - 1:
+			cameraMenuShutterSpeed = len(ShutterSpeed) - 1
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
@@ -206,6 +208,7 @@ def right():
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
+	
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB + 1
 		if cameraMenuAWB > 9:
@@ -229,6 +232,7 @@ def left():
 	global cameraMenuISO
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
+	
 	if cameraMenu == 0:
 		cameraMenuISO = cameraMenuISO - 1
 		if cameraMenuISO < 0:
@@ -242,6 +246,7 @@ def left():
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['ISO']
+	
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed - 1
 		if cameraMenuShutterSpeed < 0:
@@ -255,6 +260,7 @@ def left():
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
 			print ShutterSpeed[cameraMenuShutterSpeed]
+	
 	elif cameraMenu == 2:
 		cameraMenuAWB = cameraMenuAWB - 1
 		if cameraMenuAWB < 0:
@@ -294,7 +300,7 @@ def down():
 	time.sleep(.2)
 	cameraReady()
 
-cameraReady()								#lauch cameraReady def
+main()								#lauch cameraReady def
 GPIO.cleanup() 								#clean up the GPIO python pin library
 
 
