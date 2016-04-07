@@ -161,22 +161,22 @@ def snapPmode(self):
 
 def right():
 	print "Right Button Pressed"
-	sleep(.5)
+	time.sleep(.5)
 	cameraReady()
 
 def left():
 	print "Left Button Pressed"
-	sleep(.5)
+	time.sleep(.5)
 	cameraReady()
 
 def up():
 	print "Up Button Pressed"
-	sleep(.5)
+	time.sleep(.5)
 	cameraReady()
 
 def down():
 	print "Down Button Pressed"
-	sleep(.5)
+	time.sleep(.5)
 	cameraReady()
 
 main()										#lauch main def
