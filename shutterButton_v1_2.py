@@ -64,11 +64,17 @@ cameraSettings = {
 }
 cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance'
 ISO = 0, 100, 200, 320, 400, 500, 640, 800
-ShutterSpeed = 0, 1, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
-ShutterSpeedMicro = 0, 100000, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
+ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1
+ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500
 AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 
 def main():
+	os.system("clear")
+	print "Hello World!"
+	print "PiLaroid v1.1"
+	print "Created by: Garrett Martin"
+	time.sleep(3)
+	os.system("clear")
 	cameraReady() 							#start the infinite loop function
 
 def cameraReady(): 							#idle loop keeping the program running while you do shit
@@ -176,8 +182,8 @@ def right():
 	global cameraMenuAWB
 	if cameraMenu == 0: 					#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 	#go to next menu item
-		if cameraMenuISO > 7: 				#if you reach the last item available stop counting
-			cameraMenuISO = 7 				#set to max variable
+		if cameraMenuISO > len(ISO): 				#if you reach the last item available stop counting
+			cameraMenuISO = len(ISO) 				#set to max variable
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
@@ -189,8 +195,8 @@ def right():
 			print cameraSettings['ISO'] 	#print the current setting for ISO listed from the Dict
 	elif cameraMenu == 1:
 		cameraMenuShutterSpeed = cameraMenuShutterSpeed + 1
-		if cameraMenuShutterSpeed > 9:
-			cameraMenuShutterSpeed = 9
+		if cameraMenuShutterSpeed > 8:
+			cameraMenuShutterSpeed = 8
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			os.system("clear")
 			print cameraMenuTypes[cameraMenu]
