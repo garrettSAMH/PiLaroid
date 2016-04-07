@@ -245,6 +245,7 @@ def left():
 	cameraReady()
 
 def up():
+	os.system("clear")
 	global cameraMenu
 	cameraMenu = cameraMenu	- 1
 	if cameraMenu < 0:
@@ -254,6 +255,7 @@ def up():
 	cameraReady()
 
 def down():
+	os.system("clear")
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
 	if cameraMenu > 2:
