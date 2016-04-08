@@ -214,6 +214,9 @@ def right():
 			else:
 				print cameraMenuTypes[cameraMenu]
 				print cameraSettings['ISO'] 		#print the current setting for ISO listed from the Dict 
+		elif cameraMenuISO == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto" 						#print the current setting for ISO listed from the Dict as auto if it is 0
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
 			print cameraMenuTypes[cameraMenu]
@@ -231,6 +234,9 @@ def right():
 			else:
 				print cameraMenuTypes[cameraMenu]
 				print ShutterSpeed[cameraMenuShutterSpeed]
+		elif cameraMenuShutterSpeed == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print cameraMenuTypes[cameraMenu]
@@ -336,6 +342,9 @@ def left():
 			else:
 				print cameraMenuTypes[cameraMenu]
 				print cameraSettings['ISO']
+		elif cameraMenuISO == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			print cameraMenuTypes[cameraMenu]
@@ -353,6 +362,9 @@ def left():
 			else:
 				print cameraMenuTypes[cameraMenu]
 				print ShutterSpeed[cameraMenuShutterSpeed]
+		elif cameraMenuShutterSpeed == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print cameraMenuTypes[cameraMenu]
