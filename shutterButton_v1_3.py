@@ -45,22 +45,22 @@ mcp.pullup(4,1) 									#set pin 5 to input with pullup resistor
 ## V A R I A B L E S ##
 #######################
 
-global imgCount 									#running image count variable
+#global imgCount 									#running image count variable
 imgCount = 1
 
-global cameraMenu 									#Variable picks the menu setting that the camera is on
+#global cameraMenu 									#Variable picks the menu setting that the camera is on
 cameraMenu = 0
 
-global cameraMenuISO 								#for the ISO menu settings
+#global cameraMenuISO 								#for the ISO menu settings
 cameraMenuISO = 0
 
-global cameraMenuShutterSpeed 						#for the Shutter Speed menu settings
+#global cameraMenuShutterSpeed 						#for the Shutter Speed menu settings
 cameraMenuShutterSpeed = 0
 
-global cameraMenuAWB 								#for the White Balance menu settings
+#global cameraMenuAWB 								#for the White Balance menu settings
 cameraMenuAWB = 0
 
-global cameraMenuMeter 								#for the Metering Mode menu settings
+#global cameraMenuMeter 								#for the Metering Mode menu settings
 cameraMenuMeter = 0
 
 
@@ -208,6 +208,8 @@ def right():
 	global cameraMenuAWB
 	global cameraMenuMeter
 	global Contrast
+	global Saturation
+	global ExposureComp
 
 	##### I S O #####
 	if cameraMenu == 0: 							#Determines what menu item you're able to change
@@ -320,6 +322,8 @@ def left():
 	global cameraMenuAWB
 	global cameraMenuMeter
 	global Contrast
+	global Saturation
+	global ExposureComp
 	
 	##### I S O #####
 	if cameraMenu == 0:
