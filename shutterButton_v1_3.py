@@ -374,7 +374,10 @@ def left():
 		if Saturation < -100:
 			Saturation = -100
 			cameraSettings['saturation'] = Saturation
-			print "Black and White"
+			print "Black & White"
+		elif Saturation == -100:
+			cameraSettings['saturation'] = Saturation
+			print "Black & White"
 		elif Saturation == 0:
 			cameraSettings['saturation'] = Saturation
 			print "Normal"
