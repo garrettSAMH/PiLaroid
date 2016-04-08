@@ -434,8 +434,8 @@ def up():
 def down():											# ONLY CHANGE SETINGS BELOW IF YOU ADD MORE MENU ITEMS
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
-	if cameraMenu > 5:								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
-		cameraMenu = 5								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
+	if cameraMenu > 6:								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
+		cameraMenu = 6								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
 	print cameraMenuTypes[cameraMenu]
 	time.sleep(.2)
 	cameraReady()
