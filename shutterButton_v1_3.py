@@ -48,17 +48,20 @@ mcp.pullup(4,1) 									#set pin 5 to input with pullup resistor
 global imgCount 									#running image count variable
 imgCount = 1
 
-global cameraMenu
+global cameraMenu 									#Variable picks the menu setting that the camera is on
 cameraMenu = 0
 
-global cameraMenuISO
+global cameraMenuISO 								#for the ISO menu settings
 cameraMenuISO = 0
 
-global cameraMenuShutterSpeed
+global cameraMenuShutterSpeed 						#for the Shutter Speed menu settings
 cameraMenuShutterSpeed = 0
 
-global cameraMenuAWB
+global cameraMenuAWB 								#for the White Balance menu settings
 cameraMenuAWB = 0
+
+global cameraMenuMeter 								#for the Metering Mode menu settings
+cameraMenuMeter = 0
 
 
 #########################
@@ -69,7 +72,7 @@ cameraMenuAWB = 0
 
 cameraSettings = {									#THESE SETTINGS LOAD AS THE DEFAULT BOOT SETTINGS FOR THE CAMERA
 	'ISO': 0, 										# 0 is auto, 100, 200, 400, 800, 1600
-	'shutter_speed': 0, 							#0 is auto, otherwise is read as miliseconds
+	'shutter_speed': 0, 							#0 is auto, otherwise is read as microseconds
 	'sharpness': 0, 								#0 to 100
 	'contrast': 0,  								#0 to 100
 	'brightness': 50, 								#0 to 100
@@ -89,15 +92,17 @@ cameraSettings = {									#THESE SETTINGS LOAD AS THE DEFAULT BOOT SETTINGS FOR
 #######################
 
 ##### CAMERA MENU OPTIONS FOR BUTTON CONTROL #####
-cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance', 'Saturation'
+cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance', 'Meter Mode', 'Saturation', 'Exposure Compensation'
 
 ##### VARIABLE LISTS FOR EACH MENU OPTION FOR BUTTON CONTROL #####
 ISO = 0, 100, 200, 320, 400, 500, 640, 800
 ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1	#Have to use 2 variables here to display user friendly version on console
 ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500 		#and micoroseconds is necessary for PiCamera 
 AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
+Meter = 'average', 'spot'
 Saturation = 0
-
+Contrast = 0
+ExposureComp = 0
 
 ###################
 ##### M A I N  ####
@@ -201,6 +206,7 @@ def right():
 	global cameraMenuISO 							#bring in global menu ISO variable
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
+	global cameraMenuMeter
 	
 	##### I S O #####
 	if cameraMenu == 0: 							#Determines what menu item you're able to change
@@ -240,20 +246,67 @@ def right():
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
+
+	##### M E T E R   M O D E #####
+	elif cameraMenu == 3:
+		cameraMenuMeter = cameraMenuMeter + 1
+		if cameraMenuMeter > len(Meter) - 1:
+			cameraMenuMeter = len(Meter) - 1
+			cameraSettings['meter_mode'] = Meter[cameraMenuMeter]
+			print cameraMenuTypes[cameraMenu]
+			print cameraSettings['meter_mode']
+		else:
+			cameraSettings['meter_mode'] = Meter[cameraMenuMeter]
+			print cameraMenuTypes[cameraMenu]
+			print cameraSettings['meter_mode']
 	
 	##### S A T U R A T I O N #####
-	elif cameraMenu == 3:
-		Saturation = Saturation - 10
-		if Saturation > 100
+	elif cameraMenu == 4:
+		Saturation = Saturation + 10
+		if Saturation > 100:
 			Saturation = 100
 			cameraSettings['saturation'] = Saturation
 			print cameraSettings['saturation']
 		elif Saturation == 0:
 			cameraSettings['saturation'] = Saturation
 			print "Normal"
+		elif Saturation < 0:
+			cameraSettings['saturation'] = Saturation
+			print "-", cameraSettings['saturation']
 		else:
 			cameraSettings['saturation'] = Saturation
-			print cameraSettings['saturation']
+			print "+", cameraSettings['saturation']
+
+	##### C O N T R A S T #####
+	elif cameraMenu == 5:
+		Contrast = Contrast + 10
+		if Contrast > 100:
+			Contrast = 100
+			cameraSettings['contrast'] = Contrast
+			print "+" cameraSettings['contrast']
+		elif Contrast == 0:
+			cameraSettings['contrast'] = Contrast
+			print "Normal"
+		else:
+			cameraSettings['contrast'] = Contrast
+			print "+", cameraSettings['contrast']
+
+	##### E X P O S U R E   C O M P E N S A T I O N #####
+	elif cameraMenu == 6:
+		ExposureComp = ExposureComp + 5
+		if ExposureComp > 25:
+			ExposureComp = 25
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print cameraSettings['exposure_compensation']
+		elif ExposureComp == 0:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "Off"
+		elif ExposureComp < 0:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "-", cameraSettings['exposure_compensation']
+		else:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "+", cameraSettings['exposure_compensation']
 
 	#print "Right Button Pressed"
 	time.sleep(.2)
@@ -264,6 +317,7 @@ def left():
 	global cameraMenuISO
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
+	global cameraMenuMeter
 	
 	##### I S O #####
 	if cameraMenu == 0:
@@ -303,20 +357,64 @@ def left():
 			cameraSettings['awb_mode'] = AWB[cameraMenuAWB]
 			print cameraMenuTypes[cameraMenu]
 			print cameraSettings['awb_mode']
+
+	##### M E T E R   M O D E #####
+	elif cameraMenu == 3:
+		cameraMenuMeter = cameraMenuMeter - 1
+		if cameraMenuMeter < 0:
+			cameraMenuMeter = 0
+			cameraSettings['meter_mode'] = Meter[cameraMenuMeter]
+			print cameraMenuTypes[cameraMenu]
+			print cameraSettings['meter_mode']
+		else:
+			cameraSettings['meter_mode'] = Meter[cameraMenuMeter]
+			print cameraMenuTypes[cameraMenu]
+			print cameraSettings['meter_mode']
 	
 	##### S A T U R A T I O N #####
-	elif cameraMenu == 3:
+	elif cameraMenu == 4:
 		Saturation = Saturation - 10
-		if Saturation < -100
+		if Saturation < -100:
 			Saturation = -100
 			cameraSettings['saturation'] = Saturation
 			print cameraSettings['saturation']
 		elif Saturation == 0:
 			cameraSettings['saturation'] = Saturation
 			print "Normal"
+		elif Saturation < 0:
+			cameraSettings['saturation'] = Saturation
+			print "-", cameraSettings['saturation']
 		else:
 			cameraSettings['saturation'] = Saturation
-			print cameraSettings['saturation']
+			print "+", cameraSettings['saturation']
+
+	##### C O N T R A S T #####
+	elif cameraMenu == 5:
+		Contrast = Contrast - 10
+		if Contrast < 0:
+			Contrast = 0
+			cameraSettings['contrast'] = Contrast
+			print "Normal"
+		else:
+			cameraSettings['saturation'] = Contrast
+			print "+", cameraSettings['contrast']
+
+	##### E X P O S U R E   C O M P E N S A T I O N #####
+	elif cameraMenu == 6:
+		ExposureComp = ExposureComp - 5
+		if ExposureComp < -25:
+			ExposureComp = -25
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print cameraSettings['exposure_compensation']
+		elif ExposureComp == 0:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "Normal"
+		elif ExposureComp < 0:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "-", cameraSettings['exposure_compensation']
+		else:
+			cameraSettings['exposure_compensation'] = ExposureComp
+			print "+", cameraSettings['exposure_compensation']
 
 	#print "Left Button Pressed"
 	time.sleep(.2)
@@ -334,8 +432,8 @@ def up():
 def down():											# ONLY CHANGE SETINGS BELOW IF YOU ADD MORE MENU ITEMS
 	global cameraMenu
 	cameraMenu = cameraMenu	+ 1
-	if cameraMenu > 3:								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
-		cameraMenu = 3								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
+	if cameraMenu > 5:								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
+		cameraMenu = 5								# ONLY CHANGE THIS COUNT IF YOU ADD MORE MENU ITEMS
 	print cameraMenuTypes[cameraMenu]
 	time.sleep(.2)
 	cameraReady()
