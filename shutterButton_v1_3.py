@@ -269,13 +269,13 @@ def right():
 		if Saturation > 100:
 			Saturation = 100
 			cameraSettings['saturation'] = Saturation
-			print cameraSettings['saturation']
+			print "+", cameraSettings['saturation']
 		elif Saturation == 0:
 			cameraSettings['saturation'] = Saturation
 			print "Normal"
 		elif Saturation < 0:
 			cameraSettings['saturation'] = Saturation
-			print "-", cameraSettings['saturation']
+			print cameraSettings['saturation']
 		else:
 			cameraSettings['saturation'] = Saturation
 			print "+", cameraSettings['saturation']
@@ -300,13 +300,13 @@ def right():
 		if ExposureComp > 25:
 			ExposureComp = 25
 			cameraSettings['exposure_compensation'] = ExposureComp
-			print cameraSettings['exposure_compensation']
+			print "+", cameraSettings['exposure_compensation']
 		elif ExposureComp == 0:
 			cameraSettings['exposure_compensation'] = ExposureComp
 			print "Off"
 		elif ExposureComp < 0:
 			cameraSettings['exposure_compensation'] = ExposureComp
-			print "-", cameraSettings['exposure_compensation']
+			print cameraSettings['exposure_compensation']
 		else:
 			cameraSettings['exposure_compensation'] = ExposureComp
 			print "+", cameraSettings['exposure_compensation']
@@ -383,13 +383,13 @@ def left():
 		if Saturation < -100:
 			Saturation = -100
 			cameraSettings['saturation'] = Saturation
-			print cameraSettings['saturation']
+			print "Black and White"
 		elif Saturation == 0:
 			cameraSettings['saturation'] = Saturation
 			print "Normal"
 		elif Saturation < 0:
 			cameraSettings['saturation'] = Saturation
-			print "-", cameraSettings['saturation']
+			print cameraSettings['saturation']
 		else:
 			cameraSettings['saturation'] = Saturation
 			print "+", cameraSettings['saturation']
@@ -402,7 +402,7 @@ def left():
 			cameraSettings['contrast'] = Contrast
 			print "Normal"
 		else:
-			cameraSettings['saturation'] = Contrast
+			cameraSettings['contrast'] = Contrast
 			print "+", cameraSettings['contrast']
 
 	##### E X P O S U R E   C O M P E N S A T I O N #####
@@ -417,7 +417,7 @@ def left():
 			print "Normal"
 		elif ExposureComp < 0:
 			cameraSettings['exposure_compensation'] = ExposureComp
-			print "-", cameraSettings['exposure_compensation']
+			print cameraSettings['exposure_compensation']
 		else:
 			cameraSettings['exposure_compensation'] = ExposureComp
 			print "+", cameraSettings['exposure_compensation']
