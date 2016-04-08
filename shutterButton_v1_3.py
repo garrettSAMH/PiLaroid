@@ -92,7 +92,7 @@ cameraSettings = {									#THESE SETTINGS LOAD AS THE DEFAULT BOOT SETTINGS FOR
 #######################
 
 ##### CAMERA MENU OPTIONS FOR BUTTON CONTROL #####
-cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance', 'Meter Mode', 'Saturation', 'Exposure Compensation'
+cameraMenuTypes = 'ISO', 'Shutter Speed', 'White Balance', 'Meter Mode', 'Saturation', 'Contrast', 'Exposure Compensation'
 
 ##### VARIABLE LISTS FOR EACH MENU OPTION FOR BUTTON CONTROL #####
 ISO = 0, 100, 200, 320, 400, 500, 640, 800
