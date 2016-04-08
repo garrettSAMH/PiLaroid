@@ -208,8 +208,12 @@ def right():
 		if cameraMenuISO > len(ISO) - 1: 			#if you reach the last item available stop counting
 			cameraMenuISO = len(ISO) - 1 			#set to max variable
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set the ISO setting to the cameraSettings Dict
-			print cameraMenuTypes[cameraMenu]
-			print cameraSettings['ISO'] 			#print the current setting for ISO listed from the Dict
+			if cameraMenuISO == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto" 						#print the current setting for ISO listed from the Dict as auto if it is 0
+			else:
+				print cameraMenuTypes[cameraMenu]
+				print cameraSettings['ISO'] 		#print the current setting for ISO listed from the Dict 
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO] #set ISO setting to the list number associated with cameraMenuISO to Dict
 			print cameraMenuTypes[cameraMenu]
@@ -221,8 +225,12 @@ def right():
 		if cameraMenuShutterSpeed > len(ShutterSpeed) - 1:
 			cameraMenuShutterSpeed = len(ShutterSpeed) - 1
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			print cameraMenuTypes[cameraMenu]
-			print ShutterSpeed[cameraMenuShutterSpeed]
+			if cameraMenuShutterSpeed == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
+			else:
+				print cameraMenuTypes[cameraMenu]
+				print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print cameraMenuTypes[cameraMenu]
@@ -322,8 +330,12 @@ def left():
 		if cameraMenuISO < 0:
 			cameraMenuISO = 0
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
-			print cameraMenuTypes[cameraMenu]
-			print cameraSettings['ISO']
+			if cameraMenuISO == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
+			else:
+				print cameraMenuTypes[cameraMenu]
+				print cameraSettings['ISO']
 		else:
 			cameraSettings['ISO'] = ISO[cameraMenuISO]
 			print cameraMenuTypes[cameraMenu]
@@ -335,8 +347,12 @@ def left():
 		if cameraMenuShutterSpeed < 0:
 			cameraMenuShutterSpeed = 0
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
-			print cameraMenuTypes[cameraMenu]
-			print ShutterSpeed[cameraMenuShutterSpeed]
+			if cameraMenuShutterSpeed == 0:
+				print cameraMenuTypes[cameraMenu]
+				print "auto"
+			else:
+				print cameraMenuTypes[cameraMenu]
+				print ShutterSpeed[cameraMenuShutterSpeed]
 		else:
 			cameraSettings['shutter_speed'] = ShutterSpeedMicro[cameraMenuShutterSpeed]
 			print cameraMenuTypes[cameraMenu]
