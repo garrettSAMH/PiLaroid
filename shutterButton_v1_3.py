@@ -283,7 +283,7 @@ def right():
 		if Contrast > 100:
 			Contrast = 100
 			cameraSettings['contrast'] = Contrast
-			print "+" cameraSettings['contrast']
+			print "+", cameraSettings['contrast']
 		elif Contrast == 0:
 			cameraSettings['contrast'] = Contrast
 			print "Normal"
