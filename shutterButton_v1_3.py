@@ -207,7 +207,8 @@ def right():
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
 	global cameraMenuMeter
-	
+	global Contrast
+
 	##### I S O #####
 	if cameraMenu == 0: 							#Determines what menu item you're able to change
 		cameraMenuISO = cameraMenuISO + 1 			#go to next menu item
@@ -318,6 +319,7 @@ def left():
 	global cameraMenuShutterSpeed
 	global cameraMenuAWB
 	global cameraMenuMeter
+	global Contrast
 	
 	##### I S O #####
 	if cameraMenu == 0:
