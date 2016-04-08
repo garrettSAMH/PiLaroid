@@ -45,23 +45,18 @@ mcp.pullup(4,1) 									#set pin 5 to input with pullup resistor
 ## V A R I A B L E S ##
 #######################
 
-#global imgCount 									#running image count variable
-imgCount = 1
+##### Used to navigate the menu when using a string list vs. an integer #####
+imgCount = 1 										#running image count variable
+cameraMenu = 0 										#Variable picks the menu setting that the camera is on
+cameraMenuISO = 0 									#for the ISO menu settings
+cameraMenuShutterSpeed = 0							#for the Shutter Speed menu settings
+cameraMenuAWB = 0 								 	#for the White Balance menu settings
+cameraMenuMeter = 0 								#for the Metering Mode menu settings
 
-#global cameraMenu 									#Variable picks the menu setting that the camera is on
-cameraMenu = 0
-
-#global cameraMenuISO 								#for the ISO menu settings
-cameraMenuISO = 0
-
-#global cameraMenuShutterSpeed 						#for the Shutter Speed menu settings
-cameraMenuShutterSpeed = 0
-
-#global cameraMenuAWB 								#for the White Balance menu settings
-cameraMenuAWB = 0
-
-#global cameraMenuMeter 								#for the Metering Mode menu settings
-cameraMenuMeter = 0
+##### Used for the actual setting adjustment applied to the Dictionary #####
+Saturation = 0 										#for the Saturation menu settings
+Contrast = 0 										#for the Contrast menu settings
+ExposureComp = 0 									#for the Exposure Compensation menu settings
 
 
 #########################
@@ -86,8 +81,8 @@ cameraSettings = {									#THESE SETTINGS LOAD AS THE DEFAULT BOOT SETTINGS FOR
 }
 
 #######################
-####### M E N U  ######
-##### B U T T O N #####
+####### M E N U #######
+####### L I S T #######
 ## V A R I A B L E S ##
 #######################
 
@@ -100,12 +95,10 @@ ShutterSpeed = 0, 30.1, 60.1, 125.1, 250.1, 500.1, 1000.1, 1500.1, 2000.1	#Have 
 ShutterSpeedMicro = 0, 33333, 16666, 8000, 4000, 2000, 1000, 666, 500 		#and micoroseconds is necessary for PiCamera 
 AWB = 'off', 'auto', 'sunlight', 'cloudy', 'shade', 'tungsten', 'fluorescent', 'incandescent', 'flash', 'horizon'
 Meter = 'average', 'spot'
-Saturation = 0
-Contrast = 0
-ExposureComp = 0
+
 
 ###################
-##### M A I N  ####
+##### M A I N #####
 ## P R O G R A M ##
 ###################
 
@@ -117,9 +110,7 @@ def mainStart():
 
 def cameraReady(): 									#idle loop keeping the program running while you do shit
 	global imgCount 								#import global image count variable
-	#print mcp.input(0)
-	#print mcp.input(1)
-	#print mcp.input(2)
+	#print mcp.input(0)								#Use this to learn the bit information if adding new inputs for the MCP23008
 	try: 											#create clean exit with a keyboard interupt hopefully control+c
    		while True: 								#infinite loop while waiting for button presses
 			leftPress = (mcp.input(0))				#set pin 1 to be a left button
@@ -414,7 +405,7 @@ def left():
 			print cameraSettings['exposure_compensation']
 		elif ExposureComp == 0:
 			cameraSettings['exposure_compensation'] = ExposureComp
-			print "Normal"
+			print "Off"
 		elif ExposureComp < 0:
 			cameraSettings['exposure_compensation'] = ExposureComp
 			print cameraSettings['exposure_compensation']
